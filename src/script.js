@@ -3,6 +3,7 @@ let ratio;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
+  pixelDensity(1);
   gr = createGraphics(400,400);
 
   ratio = max(1,windowWidth/window.screen.width);
