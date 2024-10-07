@@ -4,7 +4,7 @@ let offsetAcceleration = 0;
 let IR;
 function setup() {
 	createCanvas(windowWidth,windowHeight);
-	//pixelDensity(1);
+	pixelDensity(1);
 	IR = new foxIA.Inspector(this.canvas);
 	IR.add("wheel",(e)=>{
 		offsetAcceleration = -e.deltaY*0.05;
