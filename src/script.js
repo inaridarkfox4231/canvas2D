@@ -1,14 +1,29 @@
 let offsetY = 5;
 let offsetVelocity=0;
+let offsetAcceleration = 0;
+let IR;
 function setup() {
 	createCanvas(windowWidth,windowHeight);
 	//pixelDensity(1);
-	const IR = new foxIA.Inspector(this.canvas);
+	IR = new foxIA.Inspector(this.canvas);
 	IR.add("wheel",(e)=>{
-		offsetVelocity -= e.deltaY*0.05;
+		offsetAcceleration = -e.deltaY*0.05;
+		//offsetVelocity -= e.deltaY*0.05;
 	});
 }
 function draw(){
+	// IRもインタラクションなので、こういうことはできる。
+  if(IR.getPointers().length>0){
+		const p = IR.getPointers()[0];
+		if(p.y > p.rect.height/2){
+		  offsetAcceleration = 2;
+		}else{
+			offsetAcceleration = -2;
+		}
+	}
+
+	offsetVelocity += offsetAcceleration;
+	offsetAcceleration = 0;
 	offsetY = constrain(offsetY + offsetVelocity, -1000, 5);
 	offsetVelocity *= 0.85;
 	if(abs(offsetVelocity)<0.001)offsetVelocity=0;
