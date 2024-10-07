@@ -4,7 +4,7 @@ let offsetAcceleration = 0;
 let IR;
 function setup() {
 	createCanvas(windowWidth,windowHeight);
-	pixelDensity(1);
+	//pixelDensity(1);
 	IR = new foxIA.Inspector(this.canvas);
 	IR.add("wheel",(e)=>{
 		offsetAcceleration = -e.deltaY*0.05;
@@ -15,10 +15,10 @@ function draw(){
 	// IRもインタラクションなので、こういうことはできる。
   if(IR.getPointers().length>0){
 		const p = IR.getPointers()[0];
-		if(p.y > p.rect.height/2){
-		  offsetAcceleration = 2;
+		if(p.y > p.prevY){
+		  offsetAcceleration = 3;
 		}else{
-			offsetAcceleration = -2;
+			offsetAcceleration = -3;
 		}
 	}
 
