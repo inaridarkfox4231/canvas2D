@@ -7,8 +7,9 @@ const {Inspector} = fisce.foxIA;
 let IR;
 function setup() {
 	createCanvas(windowWidth,windowHeight);
+	pixelDensity(window.devicePixelRatio);
 	const cvs = document.querySelector('canvas');
-	pixelDensity(1);
+
 	IR = new Inspector(cvs);
 	IR.add("wheel",(e)=>{
 		offsetAcceleration = -e.deltaY*0.05;
